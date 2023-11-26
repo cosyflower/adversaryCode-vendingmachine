@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.change;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -6,20 +6,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import vendingmachine.Coin;
 import vendingmachine.randomGenerator.RandomNumberGenerator;
 
 public class ChangeStatus {
     private static final int INIT_VALUE = 0;
     private final Map<Coin, Integer> changeStatus;
 
-    private ChangeStatus(int changeInput, RandomNumberGenerator randomNumberGenerator) {
+    private ChangeStatus(Change change, RandomNumberGenerator randomNumberGenerator) {
         changeStatus = new EnumMap<Coin, Integer>(Coin.class);
         initChangeStatus();
-        setChangeStatus(changeInput, randomNumberGenerator);
+        setChangeStatus(change, randomNumberGenerator);
     }
 
-    public static ChangeStatus from(int changeInput, RandomNumberGenerator randomNumberGenerator) {
-        return new ChangeStatus(changeInput, randomNumberGenerator);
+    // changeInput - Request에서 toChange로 진행하면 된다
+    public static ChangeStatus from(Change change, RandomNumberGenerator randomNumberGenerator) {
+        return new ChangeStatus(change, randomNumberGenerator);
     }
 
     private void initChangeStatus() {
@@ -27,26 +29,27 @@ public class ChangeStatus {
                 .forEach(coin -> changeStatus.put(coin, INIT_VALUE));
     }
 
-    private void setChangeStatus(int changeInput, RandomNumberGenerator randomNumberGenerator) {
+    private void setChangeStatus(Change change, RandomNumberGenerator randomNumberGenerator) {
         for (Coin coin : Coin.values()) {
             int pickedNumber = randomNumberGenerator.generateRandomNumberInRange(
-                    generateNumberRange(coin, changeInput));
+                    generateNumberRange(coin, change));
             changeStatus.replace(coin, pickedNumber);
-            changeInput -= pickedNumber * coin.getAmount();
+            change = Change.from(change.getChangeValue() - pickedNumber * coin.getAmount());
         }
-        checkRest(changeInput);
+        checkRest(change);
     }
 
-    private void checkRest(int changeInput) {
-        if (changeInput > 0) {
-            int restChange = changeInput / Coin.COIN_10.getAmount();
+    private void checkRest(Change change) {
+        int changeValue = change.getChangeValue();
+        if (changeValue > 0) {
+            int restChange = changeValue / Coin.COIN_10.getAmount();
             Integer restAmount = changeStatus.get(Coin.COIN_10);
             changeStatus.put(Coin.COIN_10, restAmount + restChange);
         }
     }
 
-    private List<Integer> generateNumberRange(Coin coin, int changeInput) {
-        return IntStream.range(0, changeInput / coin.getAmount() + 1)
+    private List<Integer> generateNumberRange(Coin coin, Change change) {
+        return IntStream.range(0, change.getChangeValue() / coin.getAmount() + 1)
                 .mapToObj(num -> num)
                 .collect(Collectors.toList());
     }
