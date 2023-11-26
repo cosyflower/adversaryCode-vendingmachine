@@ -1,4 +1,4 @@
-package vendingmachine.change;
+package vendingmachine.domain.vending.change;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import vendingmachine.Coin;
+import vendingmachine.domain.vending.Coin;
 import vendingmachine.randomGenerator.RandomNumberGenerator;
 
 public class ChangeStatus {
@@ -34,8 +34,7 @@ public class ChangeStatus {
             int pickedNumber = randomNumberGenerator.generateRandomNumberInRange(
                     generateNumberRange(coin, change));
             changeStatus.replace(coin, pickedNumber);
-            // Change에서 차감하는 기능 만들기
-            change = Change.from(change.getChangeValue() - pickedNumber * coin.getAmount());
+            change = change.adjustPrice(pickedNumber * coin.getAmount());
         }
         checkRest(change);
     }
