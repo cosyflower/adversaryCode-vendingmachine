@@ -1,4 +1,4 @@
-package vendingmachine.change;
+package vendingmachine.domain.vending.change;
 
 import vendingmachine.exception.ChangeException;
 
@@ -27,5 +27,9 @@ public class Change {
 
     public int getChangeValue() {
         return changeValue;
+    }
+
+    public Change adjustPrice(int price) {
+        return Change.from(changeValue - price);
     }
 }
