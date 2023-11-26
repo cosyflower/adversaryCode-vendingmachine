@@ -34,6 +34,7 @@ public class ChangeStatus {
             int pickedNumber = randomNumberGenerator.generateRandomNumberInRange(
                     generateNumberRange(coin, change));
             changeStatus.replace(coin, pickedNumber);
+            // Change에서 차감하는 기능 만들기
             change = Change.from(change.getChangeValue() - pickedNumber * coin.getAmount());
         }
         checkRest(change);
