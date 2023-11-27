@@ -67,12 +67,10 @@ public class VendingProducts {
         return registeredProduct.getProductPriceValue();
     }
 
-    public void sellSpecificProduct(PurchasingClient purchasingClient) {
-        // 구매하려는 상품
-        RegisteredProduct purchasingProduct = purchasingClient.getRegisteredProduct();
+    public void sellSpecificProduct(RegisteredProduct registeredProduct) {
         // 구매하려는 상품명과 같은 상품을 탐색하고 차감하기
         for (RegisteredProduct vendingProduct : vendingProducts) {
-            if (vendingProduct.hasSameName(purchasingProduct.getProductNameValue())) {
+            if (vendingProduct.hasSameName(registeredProduct.getProductNameValue())) {
                 vendingProduct.minusQuantity();
                 return;
             }

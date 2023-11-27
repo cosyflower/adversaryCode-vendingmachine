@@ -68,7 +68,7 @@ public class TradeManagerTest {
         RegisteredProduct foundProduct = machine.findProductByName(purchaseProduct); // 찾고
         PurchasingClient client = PurchasingClient.of(PurchaseMoney.from("2000"), foundProduct); // Client 구성
 
-        TradeManager.trade(machine, client);
+        TradeManager.trade(machine, client, foundProduct);
 
         PurchaseMoney clientMoney = client.getPurchaseMoney();
         int purchaseMoneyValue = clientMoney.getPurchaseMoneyValue();
@@ -101,7 +101,7 @@ public class TradeManagerTest {
         RegisteredProduct foundProduct = machine.findProductByName(purchaseProduct); // 찾고
         PurchasingClient client = PurchasingClient.of(PurchaseMoney.from("2000"), foundProduct); // Client 구성
 
-        TradeManager.trade(machine, client);
+        TradeManager.trade(machine, client, foundProduct);
         Map<Coin, Integer> coinIntegerMap = TradeManager.endWithChange(machine, client);
 
         for (Coin coin : coinIntegerMap.keySet()) {

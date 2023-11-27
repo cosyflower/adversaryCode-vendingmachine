@@ -42,8 +42,8 @@ public class VendingMachine {
         return vendingProducts.findCheapestPrice();
     }
 
-    public void sellOneQuantity(PurchasingClient purchasingClient) {
-        vendingProducts.sellSpecificProduct(purchasingClient);
+    public void sellOneQuantity(RegisteredProduct registeredProduct) {
+        vendingProducts.sellSpecificProduct(registeredProduct);
     }
 
     public Map<Coin, Integer> exchangeWithCoin(PurchasingClient purchasingClient) {

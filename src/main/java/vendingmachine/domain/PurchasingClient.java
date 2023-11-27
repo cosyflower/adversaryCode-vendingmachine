@@ -6,13 +6,11 @@ import vendingmachine.exception.VendingMachineException;
 
 public class PurchasingClient {
     private PurchaseMoney purchaseMoney;
-    private RegisteredProduct registeredProduct; // VendingMachine..xx(PurchaseProduct) - RegisteredProduct
 
     private PurchasingClient(PurchaseMoney purchaseMoney,
                             RegisteredProduct registeredProduct) {
         this.purchaseMoney = purchaseMoney;
-        this.registeredProduct = registeredProduct;
-        validatePurchasingClient();
+        validatePurchasingClient(registeredProduct);
     }
 
     public static PurchasingClient of(PurchaseMoney purchaseMoney, RegisteredProduct registeredProduct) {
@@ -20,7 +18,7 @@ public class PurchasingClient {
     }
 
     // 금액이나 상품 변경시 계속 호출해야 한다 (updateClient)
-    private void validatePurchasingClient() {
+    private void validatePurchasingClient(RegisteredProduct registeredProduct) {
         if (purchaseMoney.isMoreThan(registeredProduct.getProductPriceValue())) {
             return;
         }
@@ -35,12 +33,8 @@ public class PurchasingClient {
         return true;
     }
 
-    public void payMoney() {
+    public void payMoney(RegisteredProduct registeredProduct) {
         purchaseMoney = purchaseMoney.adjustPrice(registeredProduct.getProductPrice());
-    }
-
-    public RegisteredProduct getRegisteredProduct() {
-        return registeredProduct;
     }
 
     public PurchaseMoney getPurchaseMoney() {
