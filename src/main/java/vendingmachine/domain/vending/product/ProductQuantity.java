@@ -27,4 +27,8 @@ public class ProductQuantity {
     public int getProductQuantityValue() {
         return productQuantityValue;
     }
+
+    public boolean isZero() {
+        return productQuantityValue == 0;
+    }
 }

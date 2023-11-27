@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.change;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,5 +1,6 @@
 package vendingmachine.domain.purchase;
 
+import vendingmachine.domain.vending.product.ProductPrice;
 import vendingmachine.exception.StartsWithZeroException;
 
 public class PurchaseMoney {
@@ -18,5 +19,13 @@ public class PurchaseMoney {
 
     public static PurchaseMoney from(String purchaseMoneyValue) {
         return new PurchaseMoney(purchaseMoneyValue);
+    }
+
+    public boolean isMoreThan(int miminumPrice) {
+        return purchaseMoneyValue >= miminumPrice;
+    }
+
+    public PurchaseMoney adjustPrice(ProductPrice foundProductPrice) {
+        return PurchaseMoney.from(String.valueOf(purchaseMoneyValue - foundProductPrice.getProductPriceValue()));
     }
 }

@@ -12,7 +12,7 @@ public class PurchaseMoneyRequest {
         this.purchaseMoneyRequest = purchaseMoneyRequest;
     }
 
-    public static PurchaseMoney toPurchaseMoney(String purchaseMoneyRequest) {
+    public PurchaseMoney toPurchaseMoney() {
         return PurchaseMoney.from(purchaseMoneyRequest);
     }
 

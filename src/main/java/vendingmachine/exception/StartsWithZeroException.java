@@ -1,2 +1,10 @@
-package vendingmachine.domain.purchase;public class StartsWithZeroException {
+package vendingmachine.exception;
+
+import vendingmachine.exception.VendingMachineException;
+
+public class StartsWithZeroException extends VendingMachineException {
+
+    public StartsWithZeroException(String errorMessage) {
+        super(errorMessage);
+    }
 }

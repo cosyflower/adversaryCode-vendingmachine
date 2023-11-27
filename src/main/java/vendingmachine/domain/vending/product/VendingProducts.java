@@ -41,11 +41,38 @@ public class VendingProducts {
                 .findAny().isPresent();
     }
 
-    public RegisteredProduct findMatchedProduct(PurchaseProduct purchaseProduct) {
+
+
+    public boolean isNotSoldOut() {
+        return vendingProducts.stream()
+                .filter(RegisteredProduct::hasMinimumQuantity)
+                .findFirst().isPresent();
+    }
+
+    public int findCheapestProduct() {
+        RegisteredProduct registeredProduct = vendingProducts.stream()
+                .min(RegisteredProduct::compareTo)
+                .get();
+        return registeredProduct.getProductPrice().getProductPriceValue();
+    }
+
+    public boolean hasSpecificProduct(PurchaseProduct purchaseProduct) {
+        RegisteredProduct foundProduct = findMatchedProduct(purchaseProduct);
+        return foundProduct.hasMinimumQuantity();
+    }
+
+    public ProductPrice findMatchedProductPrice(PurchaseProduct purchaseProduct) {
+        RegisteredProduct matchedProduct = findMatchedProduct(purchaseProduct);
+        return matchedProduct.getProductPrice();
+    }
+
+    private RegisteredProduct findMatchedProduct(PurchaseProduct purchaseProduct) {
         return vendingProducts.stream()
                 .filter(registeredProduct ->
                         registeredProduct.hasProduct(purchaseProduct.getPurchaseProductName())) // 추출하기
                 .findFirst()
                 .get();
     }
+
+
 }

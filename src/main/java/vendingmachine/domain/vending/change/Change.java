@@ -25,11 +25,11 @@ public class Change {
         return new Change(changeValue);
     }
 
-    public int getChangeValue() {
-        return changeValue;
-    }
-
     public Change adjustPrice(int price) {
         return Change.from(changeValue - price);
+    }
+
+    public int getChangeValue() {
+        return changeValue;
     }
 }

@@ -19,7 +19,6 @@ public class ChangeStatus {
         setChangeStatus(change, randomNumberGenerator);
     }
 
-    // changeInput - Request에서 toChange로 진행하면 된다
     public static ChangeStatus from(Change change, RandomNumberGenerator randomNumberGenerator) {
         return new ChangeStatus(change, randomNumberGenerator);
     }

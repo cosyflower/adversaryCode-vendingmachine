@@ -13,7 +13,7 @@ public class PurchaseProductRequest {
         this.purchaseProduct = purchaseProduct;
     }
 
-    public static PurchaseProduct toPurchaseProduct(String purchaseProduct, VendingMachine vendingMachine) {
+    public PurchaseProduct toPurchaseProduct(VendingMachine vendingMachine) {
         return PurchaseProduct.of(purchaseProduct, vendingMachine);
     }
 
