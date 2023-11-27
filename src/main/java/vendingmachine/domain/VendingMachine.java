@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.purchase.PurchaseProduct;
 import vendingmachine.domain.vending.change.ChangeStatus;
+import vendingmachine.domain.vending.product.RegisteredProduct;
 import vendingmachine.domain.vending.product.VendingProducts;
 
 public class VendingMachine {
@@ -23,5 +25,10 @@ public class VendingMachine {
 
     public boolean isSoldOutProduct(String purchaseProductValue) {
         return vendingProducts.isSoldOut(purchaseProductValue);
+    }
+
+    // PurchaseProduct -> search - Registeredproduct - Client field 등록
+    public RegisteredProduct findProductByName(PurchaseProduct purchaseProduct) {
+        return vendingProducts.searchProductByName(purchaseProduct);
     }
 }

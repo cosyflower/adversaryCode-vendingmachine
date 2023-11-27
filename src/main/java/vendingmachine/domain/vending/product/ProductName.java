@@ -10,11 +10,8 @@ public class ProductName {
     public static ProductName from(String productNameValue) {
         return new ProductName(productNameValue);
     }
-    public String getProductNameValue() {
-        return productNameValue;
-    }
 
-    public boolean hasSameName(String purchaseProductValue) {
+    public boolean hasSameNameValue(String purchaseProductValue) {
         return productNameValue.equals(purchaseProductValue);
     }
 }

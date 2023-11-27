@@ -3,7 +3,7 @@ package vendingmachine.domain.vending.product;
 public class RegisteredProduct implements Comparable<RegisteredProduct> {
     private final ProductName productName;
     private final ProductPrice productPrice;
-    private final ProductQuantity productQuantity;
+    private ProductQuantity productQuantity;
 
     private RegisteredProduct(ProductName productName, ProductPrice productPrice,
                              ProductQuantity productQuantity) {
@@ -18,7 +18,7 @@ public class RegisteredProduct implements Comparable<RegisteredProduct> {
     }
 
     public boolean hasProduct(String purchaseProductValue) {
-        return productName.hasSameName(purchaseProductValue);
+        return productName.hasSameNameValue(purchaseProductValue);
     }
 
     public boolean hasMinimumQuantity() {
@@ -26,6 +26,10 @@ public class RegisteredProduct implements Comparable<RegisteredProduct> {
             return false;
         }
         return true;
+    }
+
+    public boolean hasSameName(String purchaseProductValue) {
+        return productName.hasSameNameValue(purchaseProductValue);
     }
 
     @Override
@@ -37,13 +41,7 @@ public class RegisteredProduct implements Comparable<RegisteredProduct> {
         return productName;
     }
 
-    public ProductPrice getProductPrice() {
-        return productPrice;
+    public int getProductPriceValue() {
+        return productPrice.getProductPriceValue();
     }
-
-    public ProductQuantity getProductQuantity() {
-        return productQuantity;
-    }
-
-
 }

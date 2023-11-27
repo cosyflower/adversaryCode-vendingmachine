@@ -34,45 +34,24 @@ public class VendingProducts {
         throw new ProductException("중복된 상품을 입력했습니다.");
     }
 
-
-    public boolean isProductExisted(String purchaseProductNameValue) {
+    public boolean isNotExistingProduct(String purchaseProductValue) {
         return vendingProducts.stream()
-                .filter(vendingProduct -> vendingProduct.hasProduct(purchaseProductNameValue)) // 추출하기
-                .findAny().isPresent();
+                .noneMatch(registeredProduct -> registeredProduct.hasProduct(purchaseProductValue));
     }
 
+    public boolean isSoldOut(String purchaseProductValue) {
+        if (vendingProducts.stream()
+                .filter(registeredProduct -> registeredProduct.hasSameName(purchaseProductValue))
+                .allMatch(RegisteredProduct::hasMinimumQuantity)) {
+            return false;
+        }
+        return true;
+    }
 
-
-    public boolean isNotSoldOut() {
+    public RegisteredProduct searchProductByName(PurchaseProduct purchaseProduct) {
         return vendingProducts.stream()
-                .filter(RegisteredProduct::hasMinimumQuantity)
-                .findFirst().isPresent();
-    }
-
-    public int findCheapestProduct() {
-        RegisteredProduct registeredProduct = vendingProducts.stream()
-                .min(RegisteredProduct::compareTo)
-                .get();
-        return registeredProduct.getProductPrice().getProductPriceValue();
-    }
-
-    public boolean hasSpecificProduct(PurchaseProduct purchaseProduct) {
-        RegisteredProduct foundProduct = findMatchedProduct(purchaseProduct);
-        return foundProduct.hasMinimumQuantity();
-    }
-
-    public ProductPrice findMatchedProductPrice(PurchaseProduct purchaseProduct) {
-        RegisteredProduct matchedProduct = findMatchedProduct(purchaseProduct);
-        return matchedProduct.getProductPrice();
-    }
-
-    private RegisteredProduct findMatchedProduct(PurchaseProduct purchaseProduct) {
-        return vendingProducts.stream()
-                .filter(registeredProduct ->
-                        registeredProduct.hasProduct(purchaseProduct.getPurchaseProductName())) // 추출하기
+                .filter(registeredProduct -> registeredProduct.hasSameName(purchaseProduct.getPurchaseProductValue()))
                 .findFirst()
-                .get();
+                .orElseThrow(IllegalArgumentException::new);
     }
-
-
 }

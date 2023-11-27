@@ -23,4 +23,8 @@ public class PurchaseProduct {
             throw new ProductException("품절된 상품입니다.");
         }
     }
+
+    public String getPurchaseProductValue() {
+        return purchaseProductValue;
+    }
 }
