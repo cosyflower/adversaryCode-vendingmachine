@@ -24,11 +24,11 @@ public class ProductQuantity {
         }
     }
 
-    public int getProductQuantityValue() {
-        return productQuantityValue;
-    }
-
     public boolean isZero() {
         return productQuantityValue == 0;
+    }
+
+    public ProductQuantity minusOne() {
+        return ProductQuantity.from(String.valueOf(productQuantityValue - 1));
     }
 }

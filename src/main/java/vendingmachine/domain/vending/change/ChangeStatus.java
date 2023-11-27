@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import vendingmachine.domain.purchase.PurchaseMoney;
 import vendingmachine.domain.vending.Coin;
 import vendingmachine.randomGenerator.RandomNumberGenerator;
 
@@ -55,5 +56,26 @@ public class ChangeStatus {
 
     public Map<Coin, Integer> getChangeStatus() {
         return changeStatus;
+    }
+
+    public Map<Coin, Integer> checkChange(PurchaseMoney remainedMoneyForChange) {
+        Map<Coin, Integer> exchangeCoin = new EnumMap<Coin, Integer>(Coin.class);
+        int remainedMoneyValue = remainedMoneyForChange.getPurchaseMoneyValue();
+
+        for (Coin coin : changeStatus.keySet()) {
+            int validCoinQuantity = getValidCoinQuantity(remainedMoneyValue / coin.getAmount(),
+                    changeStatus.get(coin));
+            exchangeCoin.put(coin, validCoinQuantity);
+            remainedMoneyValue -= validCoinQuantity * coin.getAmount();
+        }
+
+        return exchangeCoin;
+    }
+
+    private int getValidCoinQuantity(int dividend, int total) {
+        if (dividend <= total) {
+            return dividend;
+        }
+        return total;
     }
 }

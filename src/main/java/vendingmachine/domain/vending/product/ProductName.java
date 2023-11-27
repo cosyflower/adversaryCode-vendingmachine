@@ -14,4 +14,8 @@ public class ProductName {
     public boolean hasSameNameValue(String purchaseProductValue) {
         return productNameValue.equals(purchaseProductValue);
     }
+
+    public String getProductNameValue() {
+        return productNameValue;
+    }
 }

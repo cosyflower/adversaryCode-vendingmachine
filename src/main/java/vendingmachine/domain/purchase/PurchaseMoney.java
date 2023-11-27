@@ -11,14 +11,14 @@ public class PurchaseMoney {
         this.purchaseMoneyValue = Integer.parseInt(purchaseMoneyValue);
     }
 
+    public static PurchaseMoney from(String purchaseMoneyValue) {
+        return new PurchaseMoney(purchaseMoneyValue);
+    }
+
     private void validatePurchaseMoney(String purchaseMoneyValue) {
         if (purchaseMoneyValue.startsWith("0") && purchaseMoneyValue.length() > 1) {
             throw new StartsWithZeroException("0으로 시작하는 수를 입력했습니다");
         }
-    }
-
-    public static PurchaseMoney from(String purchaseMoneyValue) {
-        return new PurchaseMoney(purchaseMoneyValue);
     }
 
     public boolean isMoreThan(int miminumPrice) {
@@ -27,5 +27,9 @@ public class PurchaseMoney {
 
     public PurchaseMoney adjustPrice(ProductPrice foundProductPrice) {
         return PurchaseMoney.from(String.valueOf(purchaseMoneyValue - foundProductPrice.getProductPriceValue()));
+    }
+
+    public int getPurchaseMoneyValue() {
+        return purchaseMoneyValue;
     }
 }

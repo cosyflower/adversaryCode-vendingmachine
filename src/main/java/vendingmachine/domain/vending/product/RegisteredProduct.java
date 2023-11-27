@@ -32,9 +32,22 @@ public class RegisteredProduct implements Comparable<RegisteredProduct> {
         return productName.hasSameNameValue(purchaseProductValue);
     }
 
+    public boolean hasZeroQuantity() {
+        return !hasMinimumQuantity();
+    }
+
+    public void minusQuantity() {
+        ProductQuantity afterPurchaseQuantity = this.productQuantity.minusOne();
+        productQuantity = afterPurchaseQuantity;
+    }
+
     @Override
     public int compareTo(RegisteredProduct o) {
         return this.productPrice.getProductPriceValue() - o.productPrice.getProductPriceValue();
+    }
+
+    public String getProductNameValue() {
+        return productName.getProductNameValue();
     }
 
     public ProductName getProductName() {
@@ -43,5 +56,9 @@ public class RegisteredProduct implements Comparable<RegisteredProduct> {
 
     public int getProductPriceValue() {
         return productPrice.getProductPriceValue();
+    }
+
+    public ProductPrice getProductPrice() {
+        return productPrice;
     }
 }
