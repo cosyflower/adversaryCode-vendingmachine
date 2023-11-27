@@ -5,15 +5,15 @@ import vendingmachine.exception.VendingMachineException;
 import vendingmachine.parser.RequestRegex;
 
 public class PurchaseMoneyRequest {
-    private final String purchaseMoneyRequest;
+    private final String purchaseMoneyRequestInput;
 
     public PurchaseMoneyRequest(String purchaseMoneyRequest) {
         validatePurchaseMoneyRequest(purchaseMoneyRequest);
-        this.purchaseMoneyRequest = purchaseMoneyRequest;
+        this.purchaseMoneyRequestInput = purchaseMoneyRequest;
     }
 
     public PurchaseMoney toPurchaseMoney() {
-        return PurchaseMoney.from(purchaseMoneyRequest);
+        return PurchaseMoney.from(purchaseMoneyRequestInput);
     }
 
     private void validatePurchaseMoneyRequest(String purchaseMoneyRequest) {
