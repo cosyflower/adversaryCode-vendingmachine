@@ -46,8 +46,26 @@ public class PurchaseProductTest {
         Assertions.assertThatCode(() -> PurchaseProduct.from("신라", machine))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("존재하지 않는 메뉴입니다.");
-
     }
 
+    @Test
+    void 예외2() {
+        VendingMachine machine = VendingMachine.of(ChangeStatus.from(Change.from(500), new RandomNumberInRange()),
+                VendingProducts.from(Arrays.asList(
+                                RegisteredProduct.of(
+                                        ProductName.from("신라면"),
+                                        ProductPrice.from("1000"),
+                                        ProductQuantity.from("10")),
+                                RegisteredProduct.of(
+                                        ProductName.from("진라면"),
+                                        ProductPrice.from("1200"),
+                                        ProductQuantity.from("0"))
+                        )
+                )
+        );
 
+        Assertions.assertThatCode(() -> PurchaseProduct.from("진라면", machine))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("품절된 상품입니다.");
+    }
 }
