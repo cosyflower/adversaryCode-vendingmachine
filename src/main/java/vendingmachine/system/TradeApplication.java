@@ -2,7 +2,9 @@ package vendingmachine.system;
 
 import vendingmachine.controller.register.RegisterChangeController;
 import vendingmachine.controller.display.DisplayChangeStatusController;
+import vendingmachine.controller.register.RegisterProductsController;
 import vendingmachine.domain.vending.change.Change;
+import vendingmachine.domain.vending.product.VendingProducts;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -18,5 +20,8 @@ public class TradeApplication {
     public void run() {
         Change change = new RegisterChangeController(inputView).process();
         new DisplayChangeStatusController(change, outputView).process();
+
+        VendingProducts vendingProducts = new RegisterProductsController(inputView).process(); // 상품 등록
+
     }
 }

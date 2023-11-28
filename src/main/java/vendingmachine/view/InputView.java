@@ -16,6 +16,11 @@ public class InputView {
         return readInput();
     }
 
+    public String inputProducts() {
+        printMessage("상품명과 가격, 수량을 입력해 주세요.");
+        return readInput();
+    }
+
     private String readInput() {
         return reader.input();
     }
@@ -23,4 +28,6 @@ public class InputView {
     private void printMessage(String message) {
         writer.print(message);
     }
+
+
 }

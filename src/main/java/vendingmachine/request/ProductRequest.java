@@ -28,7 +28,6 @@ public class ProductRequest {
     }
 
     private RegisteredProduct toRegisteredProduct(String splitProductRequestInput) {
-        // "[, ] " 먼저 제거해야 한다
         splitProductRequestInput = splitProductRequestInput.substring(1, splitProductRequestInput.length() - 1);
 
         String[] splitInput = splitProductRequestInput.split(",");
