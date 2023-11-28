@@ -1,4 +1,4 @@
-package vendingmachine.controller;
+package vendingmachine.controller.register;
 
 import vendingmachine.ExceptionHandler;
 import vendingmachine.domain.vending.change.Change;

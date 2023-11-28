@@ -5,6 +5,7 @@ import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import vendingmachine.domain.PurchasingClient;
+import vendingmachine.system.TradeManager;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.purchase.PurchaseMoney;
 import vendingmachine.domain.purchase.PurchaseProduct;

@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.system;
 
 import java.util.Map;
 import vendingmachine.domain.PurchasingClient;

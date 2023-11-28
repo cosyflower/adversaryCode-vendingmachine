@@ -1,6 +1,6 @@
-package vendingmachine;
+package vendingmachine.system;
 
-import vendingmachine.controller.RegisterChangeController;
+import vendingmachine.controller.register.RegisterChangeController;
 import vendingmachine.controller.display.DisplayChangeStatusController;
 import vendingmachine.domain.vending.change.Change;
 import vendingmachine.view.InputView;

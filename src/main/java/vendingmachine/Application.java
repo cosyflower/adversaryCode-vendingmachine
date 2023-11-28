@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.system.TradeApplication;
 import vendingmachine.view.ConsoleReader;
 import vendingmachine.view.ConsoleWriter;
 import vendingmachine.view.InputView;
